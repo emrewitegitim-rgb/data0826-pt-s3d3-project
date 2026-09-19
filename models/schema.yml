@@ -8,10 +8,36 @@ sources:
       - name: products
         identifier: raw_gz_product
         description: product list in greenweez
+        columns:
+          - name: products_id
+            description: unique id of the product
+            tests:
+              - unique
+              - not_null
       - name: sales
         identifier: raw_gz_sales
         description: saled data for greenweez
+        columns:
+          - name: pdt_id
+            description: Each product id in the order
+            tests:
+              - not_null
+        tests:
+          - unique:
+              arguments:
+                column_name: "orders_id || '-' || pdt_id"
+        config:
+          freshness:
+            warn_after: {count: 900, period: day}
+          loaded_at_field: "CAST(date_date as TIMESTAMP)"
+            
       - name: ship
         identifier: raw_gz_ship
         description: shipment data for each package
+        columns:
+          - name: orders_id
+            description: uniwu id of shipped order
+            tests:
+              - unique
+              - not_null
 
