@@ -5,7 +5,7 @@ sources:
     schema: greenweez_data0826_pt
     description: raw source files for greenweez finance department
     tables:
-      - name: product
+      - name: products
         identifier: raw_gz_product
         description: product list in greenweez
       - name: sales
